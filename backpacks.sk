@@ -1,1 +1,61 @@
 
+#You may use the skript but you should credit SmartPotatoes or/and link back to the original github repository
+#Requirements: Skript, SkBee
+#Version: 0.0.1
+
+command /givebackpack <string> <player=%player%>:
+	permission: potato.givebackpack
+	permission message: &cNo Permission
+	usage: &cCorrect example: /givebackpack medium SmartPotatoes
+	trigger:
+		if arg-1 is "small":
+			set {_bp} to ender chest named "&fSmall Backpack" with lore "&7&oSmall Backpack"
+			add nbt compound of "{unstackable:%random integer between 111111 and 999999%}" to nbt compound of {_bp}
+			give {_bp} to arg-2
+		else if arg-1 is "medium":
+			set {_bp} to ender chest named "&fMedium Backpack" with lore "&7&oMedium Backpack"
+			add nbt compound of "{unstackable:%random integer between 111111 and 999999%}" to nbt compound of {_bp}
+			give {_bp} to arg-2
+		else if arg-1 is "large":
+			set {_bp} to ender chest named "&fLarge Backpack" with lore "&7&oLarge Backpack"
+			add nbt compound of "{unstackable:%random integer between 111111 and 999999%}" to nbt compound of {_bp}
+			give {_bp} to arg-2
+		else:
+			send "&cCorrect example: /givebackpack medium SmartPotatoes"
+
+on tab complete of "/givebackpack":	
+	set tab completions for position 1 to "small", "medium" and "large"
+
+on rightclick:
+	line 1 of lore of player's tool contains "backpack"
+	cancel event
+	set (metadata value "backpack" of player) to chest inventory with 2 rows named "&8Small Backpack"
+	play sound "block.barrel.open" with volume 0.5 to the player
+	if line 1 of lore of player's tool is "&7&oMedium Backpack":
+		set (metadata value "backpack" of player) to chest inventory with 4 rows named "&8Medium Backpack"
+	if line 1 of lore of player's tool is "&7&oLarge Backpack":
+		set (metadata value "backpack" of player) to chest inventory with 6 rows named "&8Large Backpack"
+	set {_slot} to 0
+	loop 54 times:
+		set {_item} to tag "backpack;%{_slot}%" of (nbt compound of player's tool)
+		set slot {_slot} of (metadata value "backpack" of player) to {_item} parsed as item
+		add 1 to {_slot}
+	open (metadata value "backpack" of player) to player
+
+on inventory close:
+	(metadata value "backpack" of player) is event-inventory
+	line 1 of lore of player's tool contains "backpack"
+	set {_slot} to 0
+	play sound "block.barrel.close" with volume 0.5 to the player
+	set {_slot} to 0
+	loop 54 times:
+		set tag "backpack;%{_slot}%" of (nbt compound of player's tool) to "%slot {_slot} of player's current inventory%"
+		set {_tag} to tag "backpack;%{_slot}%" of (nbt compound of player's tool)
+		add 1 to {_slot}
+	delete (metadata value "backpack" of player)
+
+on inventory click:
+	(metadata value "backpack" of player) is set
+	line 1 of lore of event-item contains "backpack"
+	cancel event
+	send action bar "&cYou are not allowed to do this!" to player
