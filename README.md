@@ -1,6 +1,6 @@
 # Backpacks Skript
 Backpacks Skript made by @SmartPotatoes69
-You may use the code but you must link back to this <a href="https://github.com/SmartPotatoes69/">Github Page</a>
+You may use the code but you must link back to this <a href="https://github.com/SmartPotatoes69/Backpacks">Github Page</a>
 
 # **Requirements**
 
