@@ -1,7 +1,27 @@
-
 #You may use the skript but you should credit SmartPotatoes or/and link back to the original github repository
 #Requirements: Skript, SkBee
-#Version: 0.0.1
+#Version: 0.0.2
+
+	#recipe ORDER: slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9
+	#slot1, slot2, slot3, 
+	#slot4, slot5, slot6, 
+	#slot7, slot8, slot9
+
+options:
+	smallRecipe: air, oak log, air, oak log, chest, oak log, air, oak log and air
+	mediumRecipe: air, iron ingot, air, iron ingot, {_small}, iron ingot, air, iron ingot and air
+	largeRecipe: air, diamond, air, diamond, {_medium}, diamond, air, diamond and air
+
+on load:
+	set {_small} to ender chest named "&fSmall Backpack" with lore "&7&oSmall Backpack"
+	add nbt compound of "{unstackable:%random integer between 111111 and 999999%}" to nbt compound of {_small}
+	set {_medium} to ender chest named "&fMedium Backpack" with lore "&7&oMedium Backpack"
+	add nbt compound of "{unstackable:%random integer between 111111 and 999999%}" to nbt compound of {_medium}
+	set {_large} to ender chest named "&fLarge Backpack" with lore "&7&oLarge Backpack"
+	add nbt compound of "{unstackable:%random integer between 111111 and 999999%}" to nbt compound of {_large}
+	register new shaped recipe for {_small} using {@smallRecipe} with id "backpacks:small"
+	register new shaped recipe for {_medium} using air, iron chestplate, air, air, iron chestplate and air with id "backpacks:small"
+	register new shaped recipe for {_large} using air, iron chestplate, air, air, iron chestplate and air with id "backpacks:small"
 
 command /givebackpack <string> <player=%player%>:
 	permission: potato.givebackpack
