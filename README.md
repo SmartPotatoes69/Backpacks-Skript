@@ -7,5 +7,4 @@ You may use the skript but you should credit @SmartPotatoes69 or/and link back t
 - <a href="https://github.com/ShaneBeee/SkBee/releases">SkBee</a>
 
 # **Newest Update** 2023-01-05
-RELEASE
 Added Recipes
