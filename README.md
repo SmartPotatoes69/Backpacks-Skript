@@ -8,3 +8,4 @@ You may use the skript but you should credit @SmartPotatoes69 or/and link back t
 
 # **Newest Update** 2023-01-05
 RELEASE
+Added Recipes
